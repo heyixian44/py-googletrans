@@ -16,6 +16,7 @@ from googletrans.models import Translated, Detected
 
 
 EXCLUDES = ('en', 'ca', 'fr')
+requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
 
 class Translator(object):
@@ -44,6 +45,7 @@ class Translator(object):
                  proxies=None, timeout=None):
 
         self.session = requests.Session()
+        self.session.verify = False
         if proxies is not None:
             self.session.proxies = proxies
         self.session.headers.update({
